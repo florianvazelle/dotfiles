@@ -1,8 +1,8 @@
-aliases:
+bash-aliases:
   file: bash/aliases.sh
   target: ~/.bash_aliases
 
-ps1:
+bash-ps1:
   pre_install:
     - git clone https://github.com/jonmosco/kube-ps1.git ~/.kube-ps1
   file: bash/ps1.sh
@@ -11,11 +11,14 @@ ps1:
     - SOURCE_BASH_PS1_COMMAND="[ -f ~/.bash_ps1 ] && . ~/.bash_ps1"
     - if ! grep -Fxq "$SOURCE_BASH_PS1_COMMAND" ~/.bashrc; then echo "$SOURCE_BASH_PS1_COMMAND" >> ~/.bashrc; fi
 
+#
+# https://github.com/Alcadramin/rofi-dracula
+#
+
 rofi:
-  pre_install:
-    - sudo apt install rofi
-  post_install:
-    - git clone --depth=1 https://github.com/bw3u/rofi-dracula ~/tmp-rofi-theme
-    - chmod +x ~/tmp-rofi-theme/install.sh
-    - ~/tmp-rofi-theme/install.sh
-    - rm -rf ~/tmp-rofi-theme
+  file: rofi/config.rasi
+  target: ~/.config/rofi/config.rasi
+
+rofi-theme:
+  file: rofi/dracula-one/dracula-one-dark.rasi
+  target: ~/.config/rofi/dracula-one/dracula-one-dark.rasi
